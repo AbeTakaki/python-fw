@@ -5,15 +5,19 @@ class TCPServer:
     """
     TCP通信を行うサーバークラス
     """
+    # serveメソッド
     def serve(self):
         print("===サーバーを起動===")
 
         try:
             # socketを生成
+            # TCP通信を行うためのsocketインスタンスを生成
             server_socket = socket.socket()
             server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
             # socketをlocalhostのポート8080番に割り当てる
+            # bind()は、実行中のpythonプログラムと、マシンのportを紐付けるメソッド
+            # listen()は、socketがbind済みのポートを実際にプログラムに割り当てるメソッド
             server_socket.bind(("localhost", 8080))
             server_socket.listen(10)
 
@@ -40,6 +44,7 @@ class TCPServer:
         finally:
             print("=== サーバーを停止します。 ===")
 
+# TCPServerクラスをインスタンス化し、serve()メソッドを呼び出す
 if __name__ == '__main__':
     server = TCPServer()
     server.serve()
